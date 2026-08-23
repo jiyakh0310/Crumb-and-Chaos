@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------- */
+/* Design tokens — CRUMB & CHAOS                                    */
+/* ---------------------------------------------------------------- */
+@theme {
+  /* colour system */
+  --color-espresso: #120c09;
+  --color-chocolate: #21130f;
+  --color-cocoa: #42271d;
+  --color-caramel: #c4875b;
+  --color-cream: #f4e8d8;
+  --color-biscuit: #d7bfa5;
+  --color-cherry: #a94a4f;
+  --color-pistachio: #9ca77b;
+
+  /* type system */
+  --font-display: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-sans: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --font-hand: "Caveat", cursive;
+
+  /* layout */
+  --container-max: 88rem; /* 1408px */
+
+  /* motion easing */
+  --ease-crumb: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------------------------------------------------------------- */
+/* Base                                                              */
+/* ---------------------------------------------------------------- */
+@layer base {
+  * {
+    border-color: color-mix(in oklab, var(--color-cream) 12%, transparent);
+  }
+
+  html {
+    background-color: var(--color-espresso);
+    color-scheme: dark;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-espresso);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  /* text selection */
+  ::selection {
+    background-color: var(--color-caramel);
+    color: var(--color-espresso);
+  }
+
+  /* focus states — visible, warm, never suppressed */
+  :focus-visible {
+    outline: 2px solid var(--color-caramel);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* custom scrollbar */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-cocoa) var(--color-espresso);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-espresso);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-cocoa);
+    border-radius: 999px;
+    border: 2px solid var(--color-espresso);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-caramel);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Print — recipe pages only. Redefining the palette tokens inside   */
+/* .print-area is enough to flip every existing text/bg/border       */
+/* utility to a clean light print without touching each component.   */
+/* ---------------------------------------------------------------- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+
+  .print-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 0.5in;
+    background-color: var(--color-espresso);
+
+    --color-espresso: #ffffff;
+    --color-chocolate: #ffffff;
+    --color-cocoa: #f2ece2;
+    --color-caramel: #8a5a34;
+    --color-cream: #1c130f;
+    --color-biscuit: #4a3a30;
+    --color-cherry: #a94a4f;
+    --color-pistachio: #4c5a3a;
+  }
+}
