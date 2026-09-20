@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import PlaceholderArt from "@/components/ui/PlaceholderArt";
+import ResponsiveFoodImage from "@/components/ui/ResponsiveFoodImage";
 import { useRevealTrigger } from "@/hooks/useRevealTrigger";
 import { cn } from "@/utils/cn";
 
@@ -12,7 +12,8 @@ import { cn } from "@/utils/cn";
  * simply always visible.
  */
 export default function CreationCard({ creation, index = 0, className }) {
-  const { id, title, category, note, image, icon, tone, featured } = creation;
+  const { id, title, category, note, image, images, icon, tone, featured, layoutHint } = creation;
+  const variant = layoutHint === "wide" ? "wide" : layoutHint === "small" ? "card" : "portrait";
   const shouldReduceMotion = useReducedMotion();
   const { ref, inView } = useRevealTrigger();
 
@@ -34,12 +35,14 @@ export default function CreationCard({ creation, index = 0, className }) {
         <span className="sr-only">{title}</span>
       </Link>
 
-      <PlaceholderArt
-        src={image?.src}
+      <ResponsiveFoodImage
+        images={images}
+        fallbackSrc={image?.src}
+        variant={variant}
         alt={title}
         tone={tone}
         icon={icon}
-        className="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover:scale-[1.05]"
+        className="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover:scale-[1.03]"
       />
 
       <div

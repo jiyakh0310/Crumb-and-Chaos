@@ -152,7 +152,7 @@ export default function Hero() {
         <div className="h-20 shrink-0 sm:h-24" aria-hidden="true" />
 
         <FadeUp
-          delay={0.5}
+          delay={0.35}
           distance={0}
           duration={0.9}
           className="pointer-events-none absolute right-[6%] top-[19%] hidden max-w-[13rem] -rotate-3 sm:block lg:right-[10%]"
@@ -176,20 +176,20 @@ export default function Hero() {
             </Reveal>
           </div>
 
-          <FadeUp delay={0.55}>
+          <FadeUp delay={0.22}>
             <p className="font-sans text-base font-semibold tracking-wide text-caramel sm:text-lg">
               Made with butter, chaos &amp; love.
             </p>
           </FadeUp>
 
-          <FadeUp delay={0.65} className="max-w-md sm:max-w-lg">
+          <FadeUp delay={0.3} className="max-w-md sm:max-w-lg">
             <p className="text-balance font-sans text-sm leading-relaxed text-biscuit/85 sm:text-base lg:text-lg">
               Things I've baked, cooked, loved
               <br className="hidden sm:block" /> and been bullied into sharing the recipe for.
             </p>
           </FadeUp>
 
-          <StaggerGroup className="flex flex-col items-center gap-3 pt-2 sm:flex-row sm:gap-4" delayChildren={0.8}>
+          <StaggerGroup className="flex flex-col items-center gap-3 pt-2 sm:flex-row sm:gap-4" delayChildren={0.4} staggerChildren={0.08}>
             <StaggerItem>
               <Button to="/kitchen" variant="primary" arrow className="w-56 sm:w-auto">
                 see what's cooking
@@ -203,7 +203,7 @@ export default function Hero() {
           </StaggerGroup>
         </div>
 
-        <FadeUp delay={1.1} className="flex shrink-0 flex-col items-center gap-2 pb-8 pt-10 sm:pb-10 sm:pt-12">
+        <FadeUp delay={0.6} className="flex shrink-0 flex-col items-center gap-2 pb-8 pt-10 sm:pb-10 sm:pt-12">
           <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-biscuit/55 sm:text-xs">
             scroll before I eat everything ↓
           </span>

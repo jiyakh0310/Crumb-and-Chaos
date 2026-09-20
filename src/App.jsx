@@ -1,4 +1,6 @@
-import { Route, Routes } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { Route, Routes, useLocation } from "react-router-dom";
+import PageTransition from "@/components/motion/PageTransition";
 import RootLayout from "@/layouts/RootLayout";
 import Home from "@/pages/Home";
 import Kitchen from "@/pages/Kitchen";
@@ -13,8 +15,12 @@ import MidnightMenu from "@/pages/MidnightMenu";
 import NotFound from "@/pages/NotFound";
 
 export default function App() {
+  const location = useLocation();
+
   return (
-    <Routes>
+    <AnimatePresence mode="wait" initial={false}>
+      <PageTransition key={`${location.pathname}${location.search}`}>
+        <Routes location={location}>
       {/* /midnight intentionally sits outside RootLayout — it brings
           its own minimal top bar and footer instead of the public
           site's navbar/footer. */}
@@ -32,6 +38,8 @@ export default function App() {
         <Route path="ask" element={<AskTheBaker />} />
         <Route path="*" element={<NotFound />} />
       </Route>
-    </Routes>
+        </Routes>
+      </PageTransition>
+    </AnimatePresence>
   );
 }

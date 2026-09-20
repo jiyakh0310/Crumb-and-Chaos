@@ -44,7 +44,7 @@ export default function MoodRecipeCard({ recipe, unlocked, onPlay, index = 0, cl
         tone={tone}
         icon={icon}
         className={cn(
-          "transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover:scale-[1.05]",
+          "transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover:scale-[1.03]",
           !unlocked && "saturate-[0.6] brightness-[0.75]",
         )}
       />

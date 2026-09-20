@@ -40,7 +40,7 @@ export default function JournalCard({ post, size = "default", index = 0, classNa
         alt={title}
         tone={coverImage?.tone}
         icon={coverImage?.icon}
-        className="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover:scale-[1.05]"
+        className="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover:scale-[1.03]"
       />
 
       <div

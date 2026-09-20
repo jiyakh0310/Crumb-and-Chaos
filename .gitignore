@@ -18,6 +18,10 @@ dist-ssr
 .env.*
 !.env.example
 
+# Raw, unedited personal photography — source material only, never
+# served or bundled. Curated/optimized copies live in src/assets/food.
+raw-food-photos-SOURCE/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

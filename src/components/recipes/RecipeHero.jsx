@@ -1,5 +1,5 @@
 import Eyebrow from "@/components/ui/Eyebrow";
-import PlaceholderArt from "@/components/ui/PlaceholderArt";
+import ResponsiveFoodImage from "@/components/ui/ResponsiveFoodImage";
 import Reveal from "@/components/motion/Reveal";
 import FadeUp from "@/components/motion/FadeUp";
 
@@ -21,7 +21,15 @@ export default function RecipeHero({ recipe }) {
       </h1>
 
       <div className="relative mt-5 aspect-[4/3] overflow-hidden rounded-md border border-cream/10 sm:aspect-[16/9] lg:aspect-[21/9] print:hidden">
-        <PlaceholderArt src={recipe.image?.src} alt={recipe.title} tone={recipe.tone} icon={recipe.icon} />
+        <ResponsiveFoodImage
+          images={recipe.images}
+          fallbackSrc={recipe.image?.src}
+          variant="wide"
+          alt={recipe.title}
+          tone={recipe.tone}
+          icon={recipe.icon}
+          priority
+        />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-espresso/95 via-espresso/20 to-transparent"

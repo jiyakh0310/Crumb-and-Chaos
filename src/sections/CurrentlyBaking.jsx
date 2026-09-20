@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, CakeSlice } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Container from "@/components/ui/Container";
 import PlaceholderArt from "@/components/ui/PlaceholderArt";
 import FadeUp from "@/components/motion/FadeUp";
+import chocolateCakeImg from "@/assets/food/chocolate-cake.jpg";
 
 /**
  * A short, live-feeling bridge between the cinematic hero and the
@@ -17,14 +18,15 @@ export default function CurrentlyBaking() {
       <Container>
         <FadeUp className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
           <Link
-            to="/recipes/burnt-basque-cheesecake"
+            to="/recipes/chocolate-cake"
             className="group relative h-32 w-full shrink-0 overflow-hidden rounded-md border border-cream/10 sm:h-24 sm:w-24"
           >
             <PlaceholderArt
-              tone="caramel"
-              icon={CakeSlice}
-              alt="Burnt Basque Cheesecake"
-              className="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+              src={chocolateCakeImg}
+              tone="chocolate"
+              alt="Chocolate Cake"
+              priority
+              className="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
             />
           </Link>
 
@@ -46,9 +48,9 @@ export default function CurrentlyBaking() {
               </motion.span>
             </span>
 
-            <Link to="/recipes/burnt-basque-cheesecake" className="group w-fit">
+            <Link to="/recipes/chocolate-cake" className="group w-fit">
               <h3 className="font-display text-3xl font-medium text-cream transition-colors duration-300 group-hover:text-caramel sm:text-4xl">
-                Burnt Basque Cheesecake
+                Chocolate Cake
               </h3>
             </Link>
 

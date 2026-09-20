@@ -104,6 +104,7 @@ function JournalArticle({ post }) {
                 recipe={relatedRecipe}
                 unlocked={isUnlocked(relatedRecipe.slug)}
                 onPlay={openGame}
+                variant="wide"
                 className="aspect-[16/10]"
               />
             </div>

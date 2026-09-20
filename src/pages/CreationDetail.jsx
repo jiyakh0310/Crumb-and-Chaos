@@ -3,7 +3,7 @@ import { Lock } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Button from "@/components/ui/Button";
-import PlaceholderArt from "@/components/ui/PlaceholderArt";
+import ResponsiveFoodImage from "@/components/ui/ResponsiveFoodImage";
 import Reveal from "@/components/motion/Reveal";
 import FadeUp from "@/components/motion/FadeUp";
 import GameModal from "@/components/games/GameModal";
@@ -63,11 +63,14 @@ export default function CreationDetail() {
 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
           <Reveal className="lg:col-span-7">
-            <PlaceholderArt
-              src={creation.image?.src}
+            <ResponsiveFoodImage
+              images={creation.images}
+              fallbackSrc={creation.image?.src}
+              variant="wide"
               alt={creation.title}
               tone={creation.tone}
               icon={creation.icon}
+              priority
               className="aspect-[4/5] rounded-md border border-cream/10 sm:aspect-[16/11]"
             />
           </Reveal>

@@ -18,7 +18,7 @@ export default function AboutHero() {
       </FadeUp>
 
       <div className="relative mt-5 aspect-[3/4] overflow-hidden rounded-md border border-cream/10 sm:aspect-[16/9] lg:aspect-[21/9]">
-        <PlaceholderArt alt="A kitchen mid-project, flour everywhere" tone="chocolate" icon={ChefHat} />
+        <PlaceholderArt alt="A kitchen mid-project, flour everywhere" tone="chocolate" icon={ChefHat} priority />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-espresso/95 via-espresso/25 to-transparent"

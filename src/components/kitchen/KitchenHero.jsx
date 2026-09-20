@@ -70,6 +70,7 @@ export default function KitchenHero({ things, recipesUnlockable, questionable, i
                 tone={imageA.tone}
                 icon={imageA.icon}
                 className="aspect-[4/5]"
+                priority
               />
             </FadeUp>
           ) : null}

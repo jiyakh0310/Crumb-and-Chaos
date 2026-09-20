@@ -1,4 +1,89 @@
-import { CakeSlice, Coffee, Cookie, Wheat } from "lucide-react";
+import { Cake, CakeSlice, CookingPot, Cookie, Coffee, Grid2x2, Pizza, UtensilsCrossed, Wheat } from "lucide-react";
+import chocolateChipCookiesImg from "@/assets/food/chocolate-chip-cookies.jpg";
+import homemadePizzaAltImg from "@/assets/food/homemade-pizza-alt.jpg";
+import redSaucePastaImg from "@/assets/food/red-sauce-pasta.jpg";
+import chocolateCakeImg from "@/assets/food/chocolate-cake.jpg";
+import momosWithDipImg from "@/assets/food/momos-with-dip.jpg";
+import browniesImg from "@/assets/food/brownies.jpg";
+import chocolateCupcakesImg from "@/assets/food/chocolate-cupcakes.jpg";
+
+// Frame-specific crops for dishes that get reused across the hero,
+// vault card, mood-recommendation and Kitchen contexts — each a real
+// crop for that aspect ratio, not the same photo squeezed with
+// object-fit. See `ResponsiveFoodImage`.
+import chocolateChipCookiesWide from "@/assets/food/chocolate-chip-cookies-wide.webp";
+import chocolateChipCookiesPortrait from "@/assets/food/chocolate-chip-cookies-portrait.webp";
+import chocolateChipCookiesCard from "@/assets/food/chocolate-chip-cookies-card.webp";
+import chocolateChipCookiesMobile from "@/assets/food/chocolate-chip-cookies-mobile.webp";
+import homemadePizzaWide from "@/assets/food/homemade-pizza-wide.webp";
+import homemadePizzaPortrait from "@/assets/food/homemade-pizza-portrait.webp";
+import homemadePizzaCard from "@/assets/food/homemade-pizza-card.webp";
+import homemadePizzaMobile from "@/assets/food/homemade-pizza-mobile.webp";
+import redSaucePastaWide from "@/assets/food/red-sauce-pasta-wide.webp";
+import redSaucePastaPortrait from "@/assets/food/red-sauce-pasta-portrait.webp";
+import redSaucePastaCard from "@/assets/food/red-sauce-pasta-card.webp";
+import redSaucePastaMobile from "@/assets/food/red-sauce-pasta-mobile.webp";
+import chocolateCakeWide from "@/assets/food/chocolate-cake-wide.webp";
+import chocolateCakePortrait from "@/assets/food/chocolate-cake-portrait.webp";
+import chocolateCakeCard from "@/assets/food/chocolate-cake-card.webp";
+import chocolateCakeMobile from "@/assets/food/chocolate-cake-mobile.webp";
+import momosWithDipWide from "@/assets/food/momos-with-dip-wide.webp";
+import momosWithDipPortrait from "@/assets/food/momos-with-dip-portrait.webp";
+import momosWithDipCard from "@/assets/food/momos-with-dip-card.webp";
+import momosWithDipMobile from "@/assets/food/momos-with-dip-mobile.webp";
+import browniesWide from "@/assets/food/brownies-wide.webp";
+import browniesPortrait from "@/assets/food/brownies-portrait.webp";
+import browniesCard from "@/assets/food/brownies-card.webp";
+import browniesMobile from "@/assets/food/brownies-mobile.webp";
+import chocolateCupcakesWide from "@/assets/food/chocolate-cupcakes-wide.webp";
+import chocolateCupcakesPortrait from "@/assets/food/chocolate-cupcakes-portrait.webp";
+import chocolateCupcakesCard from "@/assets/food/chocolate-cupcakes-card.webp";
+import chocolateCupcakesMobile from "@/assets/food/chocolate-cupcakes-mobile.webp";
+
+export const RESPONSIVE_IMAGES = {
+  "chocolate-chip-cookies": {
+    wide: chocolateChipCookiesWide,
+    portrait: chocolateChipCookiesPortrait,
+    card: chocolateChipCookiesCard,
+    mobile: chocolateChipCookiesMobile,
+  },
+  "homemade-pizza": {
+    wide: homemadePizzaWide,
+    portrait: homemadePizzaPortrait,
+    card: homemadePizzaCard,
+    mobile: homemadePizzaMobile,
+  },
+  "red-sauce-pasta": {
+    wide: redSaucePastaWide,
+    portrait: redSaucePastaPortrait,
+    card: redSaucePastaCard,
+    mobile: redSaucePastaMobile,
+  },
+  "chocolate-cake": {
+    wide: chocolateCakeWide,
+    portrait: chocolateCakePortrait,
+    card: chocolateCakeCard,
+    mobile: chocolateCakeMobile,
+  },
+  momos: {
+    wide: momosWithDipWide,
+    portrait: momosWithDipPortrait,
+    card: momosWithDipCard,
+    mobile: momosWithDipMobile,
+  },
+  brownies: {
+    wide: browniesWide,
+    portrait: browniesPortrait,
+    card: browniesCard,
+    mobile: browniesMobile,
+  },
+  "chocolate-cupcakes": {
+    wide: chocolateCupcakesWide,
+    portrait: chocolateCupcakesPortrait,
+    card: chocolateCupcakesCard,
+    mobile: chocolateCupcakesMobile,
+  },
+};
 
 /**
  * The Recipe Vault dataset. `ingredients` stays a short flat word
@@ -171,7 +256,7 @@ export const recipes = [
     ],
     moods: ["showing off", "dinner party", "I have a whisk and I'm not afraid to use it", "fancy", "cooking-for-someone"],
     featured: true,
-    spotlight: true,
+    spotlight: false,
   },
   {
     id: "tiramisu",
@@ -343,6 +428,512 @@ export const recipes = [
     ],
     moods: ["worth the wait", "comfort", "showing off"],
     featured: true,
+    spotlight: false,
+  },
+
+  // --- simple starter recipes for real creations. These are
+  // deliberately basic first drafts, not finished personal recipes —
+  // see each `personalNote` for the disclaimer that goes with that. ---
+  {
+    id: "chocolate-chip-cookies",
+    slug: "chocolate-chip-cookies",
+    title: "Chocolate Chip Cookies",
+    category: "Bakes",
+    icon: Cookie,
+    tone: "caramel",
+    image: { src: chocolateChipCookiesImg },
+    images: RESPONSIVE_IMAGES["chocolate-chip-cookies"],
+    description: "Dark, crackly-topped cookies loaded with chocolate chunks.",
+    personalNote: "a simple starting version for the vault — I'll probably tweak this one again.",
+    difficulty: "easy",
+    prepTime: "15 min",
+    cookTime: "12 min",
+    totalTime: "45 min (with chilling)",
+    servings: "makes 12",
+    yieldAmount: 12,
+    yieldUnit: "cookies",
+    ingredientGroups: [
+      {
+        group: "For the Dough",
+        items: [
+          { name: "Unsalted butter, softened", quantity: 115, unit: "g" },
+          { name: "Brown sugar", quantity: 100, unit: "g" },
+          { name: "Granulated sugar", quantity: 50, unit: "g" },
+          { name: "Egg", quantity: 1, unit: "large" },
+          { name: "Vanilla extract", quantity: 1, unit: "tsp" },
+          { name: "All-purpose flour", quantity: 190, unit: "g" },
+          { name: "Cocoa powder", quantity: 20, unit: "g" },
+          { name: "Baking soda", quantity: 0.5, unit: "tsp" },
+          { name: "Salt", quantity: 0.5, unit: "tsp" },
+          { name: "Dark chocolate, roughly chopped", quantity: 150, unit: "g" },
+        ],
+      },
+    ],
+    ingredients: ["Butter", "Brown sugar", "Egg", "Flour", "Cocoa powder", "Dark chocolate"],
+    wrongIngredients: ["Ketchup", "Broccoli", "Lettuce", "Mustard", "Chilli sauce", "Pickle"],
+    instructions: [
+      {
+        id: "cream",
+        title: "Cream Butter and Sugar",
+        text: "Beat the softened butter with both sugars until light and fluffy, then mix in the egg and vanilla.",
+      },
+      {
+        id: "dry",
+        title: "Add the Dry Ingredients",
+        text: "Whisk together the flour, cocoa, baking soda and salt, then fold into the wet mixture until just combined.",
+      },
+      {
+        id: "chocolate",
+        title: "Fold in the Chocolate",
+        text: "Stir in the chopped chocolate, scooping a few extra pieces onto the tops for looks.",
+      },
+      {
+        id: "chill",
+        title: "Chill",
+        text: "Chill the dough for at least 20 minutes so the cookies hold their shape.",
+        timerSeconds: 1200,
+      },
+      {
+        id: "bake",
+        title: "Bake",
+        text: "Scoop onto a lined tray and bake at 180°C (350°F) until the edges look set but the centers are still soft.",
+        timerSeconds: 660,
+      },
+      {
+        id: "cool",
+        title: "Cool",
+        text: "Let the cookies firm up on the tray for a few minutes before moving them.",
+        timerSeconds: 240,
+      },
+    ],
+    tips: [
+      "Slightly underbaked is the goal — they firm up as they cool.",
+      "This is a first-draft recipe — quantities may get adjusted later.",
+    ],
+    moods: ["comfort", "chocolate", "easy"],
+    featured: false,
+    spotlight: false,
+  },
+  {
+    id: "brownies",
+    slug: "brownies",
+    title: "Brownies",
+    category: "Desserts",
+    icon: Grid2x2,
+    tone: "chocolate",
+    image: { src: browniesImg },
+    images: RESPONSIVE_IMAGES.brownies,
+    description: "Dense, fudgy brownies with a glossy top.",
+    personalNote: "a simple starting version for the vault — I'll probably tweak this one again.",
+    difficulty: "easy",
+    prepTime: "10 min",
+    cookTime: "30 min",
+    totalTime: "45 min",
+    servings: "makes 9 squares",
+    yieldAmount: 9,
+    yieldUnit: "squares",
+    ingredientGroups: [
+      {
+        group: "For the Batter",
+        items: [
+          { name: "Unsalted butter", quantity: 115, unit: "g" },
+          { name: "Dark chocolate, chopped", quantity: 150, unit: "g" },
+          { name: "Granulated sugar", quantity: 150, unit: "g" },
+          { name: "Eggs", quantity: 2, unit: "large" },
+          { name: "Vanilla extract", quantity: 1, unit: "tsp" },
+          { name: "All-purpose flour", quantity: 80, unit: "g" },
+          { name: "Cocoa powder", quantity: 20, unit: "g" },
+          { name: "Salt", quantity: 0.25, unit: "tsp" },
+        ],
+      },
+    ],
+    ingredients: ["Butter", "Dark chocolate", "Sugar", "Eggs", "Flour", "Cocoa powder"],
+    wrongIngredients: ["Ketchup", "Broccoli", "Lettuce", "Mustard", "Chilli sauce", "Pickle"],
+    instructions: [
+      {
+        id: "melt",
+        title: "Melt Butter and Chocolate",
+        text: "Melt the butter and chocolate together, either over a double boiler or in short microwave bursts.",
+      },
+      {
+        id: "whisk",
+        title: "Whisk in Sugar and Eggs",
+        text: "Whisk the sugar into the melted chocolate, then add the eggs one at a time, followed by the vanilla.",
+      },
+      {
+        id: "fold",
+        title: "Fold in Dry Ingredients",
+        text: "Sift in the flour, cocoa and salt, folding just until no streaks remain.",
+        note: "Overmixing loses the fudgy texture — stop as soon as it's combined.",
+      },
+      {
+        id: "bake-brownies",
+        title: "Bake",
+        text: "Pour into a lined 8-inch square tin and bake at 180°C (350°F) until a skewer comes out with a few moist crumbs.",
+        timerSeconds: 1800,
+      },
+      {
+        id: "cool-brownies",
+        title: "Cool Before Cutting",
+        text: "Let the brownies cool completely in the tin before slicing into squares.",
+        timerSeconds: 900,
+      },
+    ],
+    tips: [
+      "Pull them out slightly before you think they're done — they firm up as they cool.",
+      "This is a first-draft recipe — quantities may get adjusted later.",
+    ],
+    moods: ["chocolate", "comfort", "easy"],
+    featured: false,
+    spotlight: false,
+  },
+  {
+    id: "chocolate-cupcakes",
+    slug: "chocolate-cupcakes",
+    title: "Chocolate Cupcakes",
+    category: "Desserts",
+    icon: CakeSlice,
+    tone: "chocolate",
+    image: { src: chocolateCupcakesImg },
+    images: RESPONSIVE_IMAGES["chocolate-cupcakes"],
+    description: "Simple one-bowl chocolate cupcakes, iced individually.",
+    personalNote: "a simple starting version for the vault — I'll probably tweak this one again.",
+    difficulty: "easy",
+    prepTime: "15 min",
+    cookTime: "18 min",
+    totalTime: "45 min",
+    servings: "makes 10",
+    yieldAmount: 10,
+    yieldUnit: "cupcakes",
+    ingredientGroups: [
+      {
+        group: "For the Batter",
+        items: [
+          { name: "All-purpose flour", quantity: 150, unit: "g" },
+          { name: "Cocoa powder", quantity: 30, unit: "g" },
+          { name: "Granulated sugar", quantity: 150, unit: "g" },
+          { name: "Baking powder", quantity: 1, unit: "tsp" },
+          { name: "Eggs", quantity: 2, unit: "large" },
+          { name: "Milk", quantity: 120, unit: "ml" },
+          { name: "Vegetable oil", quantity: 80, unit: "ml" },
+        ],
+      },
+      {
+        group: "For the Topping",
+        items: [{ name: "Chocolate ganache or icing", amount: "for topping" }, { name: "Sprinkles", amount: "to decorate" }],
+      },
+    ],
+    ingredients: ["Flour", "Cocoa powder", "Sugar", "Eggs", "Milk", "Vegetable oil"],
+    wrongIngredients: ["Ketchup", "Broccoli", "Lettuce", "Mustard", "Chilli sauce", "Pickle"],
+    instructions: [
+      {
+        id: "mix-dry-cupcakes",
+        title: "Mix the Dry Ingredients",
+        text: "Whisk together the flour, cocoa, sugar and baking powder in a large bowl.",
+      },
+      {
+        id: "mix-wet-cupcakes",
+        title: "Add the Wet Ingredients",
+        text: "Whisk in the eggs, milk and oil until you have a smooth, pourable batter.",
+      },
+      {
+        id: "bake-cupcakes",
+        title: "Bake",
+        text: "Divide between lined cupcake liners and bake at 180°C (350°F) until a skewer comes out clean.",
+        timerSeconds: 1080,
+      },
+      {
+        id: "cool-cupcakes",
+        title: "Cool Completely",
+        text: "Let the cupcakes cool fully before icing, or the topping will just slide off.",
+        timerSeconds: 900,
+      },
+      {
+        id: "decorate-cupcakes",
+        title: "Decorate",
+        text: "Top with ganache or icing and finish with sprinkles, one cupcake at a time.",
+      },
+    ],
+    tips: [
+      "A skewer with a few moist crumbs (not wet batter) means they're done.",
+      "This is a first-draft recipe — quantities may get adjusted later.",
+    ],
+    moods: ["chocolate", "easy", "showing off"],
+    featured: false,
+    spotlight: false,
+  },
+  {
+    id: "chocolate-cake",
+    slug: "chocolate-cake",
+    title: "Chocolate Cake",
+    category: "Desserts",
+    icon: Cake,
+    tone: "chocolate",
+    image: { src: chocolateCakeImg },
+    images: RESPONSIVE_IMAGES["chocolate-cake"],
+    description: "A straightforward dark chocolate layer cake, finished with cream.",
+    personalNote: "a simple starting version for the vault — I'll probably tweak this one again.",
+    difficulty: "a little involved",
+    prepTime: "25 min",
+    cookTime: "35 min",
+    totalTime: "1 hr 30 min",
+    servings: "serves 10",
+    yieldAmount: 10,
+    yieldUnit: "slices",
+    ingredientGroups: [
+      {
+        group: "For the Cake",
+        items: [
+          { name: "All-purpose flour", quantity: 250, unit: "g" },
+          { name: "Cocoa powder", quantity: 50, unit: "g" },
+          { name: "Granulated sugar", quantity: 300, unit: "g" },
+          { name: "Baking powder", quantity: 2, unit: "tsp" },
+          { name: "Eggs", quantity: 3, unit: "large" },
+          { name: "Milk", quantity: 240, unit: "ml" },
+          { name: "Vegetable oil", quantity: 120, unit: "ml" },
+        ],
+      },
+      {
+        group: "For Finishing",
+        items: [{ name: "Whipped cream", amount: "for frosting" }, { name: "Sprinkles or gold pearls", amount: "to decorate" }],
+      },
+    ],
+    ingredients: ["Flour", "Cocoa powder", "Sugar", "Eggs", "Milk", "Whipped cream"],
+    wrongIngredients: ["Ketchup", "Broccoli", "Lettuce", "Mustard", "Chilli sauce", "Pickle"],
+    instructions: [
+      {
+        id: "mix-batter",
+        title: "Mix the Batter",
+        text: "Whisk the dry ingredients together, then beat in the eggs, milk and oil until smooth.",
+      },
+      {
+        id: "bake-cake",
+        title: "Bake",
+        text: "Pour into a greased round tin and bake at 180°C (350°F) until a skewer comes out clean.",
+        timerSeconds: 2100,
+      },
+      {
+        id: "cool-cake",
+        title: "Cool Completely",
+        text: "Let the cake cool fully in the tin, then turn it out onto a rack.",
+        timerSeconds: 1800,
+      },
+      {
+        id: "frost",
+        title: "Frost and Decorate",
+        text: "Cover with whipped cream and pipe rosettes around the top, finishing with sprinkles or gold pearls.",
+      },
+    ],
+    tips: [
+      "A fully cooled cake is much easier to frost without crumbs mixing into the cream.",
+      "This is a first-draft recipe — quantities may get adjusted later.",
+    ],
+    moods: ["chocolate", "showing off", "dinner party"],
+    featured: true,
+    spotlight: true,
+  },
+  {
+    id: "homemade-pizza",
+    slug: "homemade-pizza",
+    title: "Homemade Pizza",
+    category: "Savory",
+    icon: Pizza,
+    tone: "cherry",
+    image: { src: homemadePizzaAltImg },
+    images: RESPONSIVE_IMAGES["homemade-pizza"],
+    description: "A quick flatbread-base pizza loaded with cheese and vegetables.",
+    personalNote: "a simple starting version for the vault — I'll probably tweak this one again.",
+    difficulty: "easy",
+    prepTime: "10 min",
+    cookTime: "10 min",
+    totalTime: "20 min",
+    servings: "serves 2",
+    yieldAmount: 2,
+    yieldUnit: "personal pizzas",
+    ingredientGroups: [
+      {
+        group: "For the Base",
+        items: [
+          { name: "Flatbread or pita base", quantity: 2, unit: "" },
+          { name: "Pizza or pasta sauce", quantity: 4, unit: "tbsp" },
+          { name: "Mozzarella, shredded", quantity: 150, unit: "g" },
+        ],
+      },
+      {
+        group: "For the Toppings",
+        items: [
+          { name: "Capsicum, sliced", quantity: 0.5, unit: "" },
+          { name: "Red onion, sliced", quantity: 0.5, unit: "" },
+          { name: "Mixed herbs and chilli flakes", amount: "to taste" },
+        ],
+      },
+    ],
+    ingredients: ["Flatbread", "Pizza sauce", "Mozzarella", "Capsicum", "Onion", "Herbs"],
+    wrongIngredients: ["Chocolate", "Ketchup packets", "Ice cream", "Candy", "Syrup", "Cereal"],
+    instructions: [
+      {
+        id: "spread-sauce",
+        title: "Spread the Sauce",
+        text: "Spread pizza or pasta sauce evenly over each flatbread base.",
+      },
+      {
+        id: "top",
+        title: "Add Cheese and Toppings",
+        text: "Scatter over the mozzarella, then the capsicum and onion.",
+      },
+      {
+        id: "bake-pizza",
+        title: "Bake or Grill",
+        text: "Bake at 200°C (400°F), or grill, until the cheese is fully melted and starting to brown in spots.",
+        timerSeconds: 480,
+      },
+      {
+        id: "finish-pizza",
+        title: "Finish and Serve",
+        text: "Sprinkle with mixed herbs and chilli flakes, then slice and serve immediately.",
+      },
+    ],
+    tips: [
+      "A hot oven/grill matters more than time here — watch it rather than trusting the clock.",
+      "This is a first-draft recipe — quantities may get adjusted later.",
+    ],
+    moods: ["easy", "comfort", "cooking-for-someone"],
+    featured: false,
+    spotlight: false,
+  },
+  {
+    id: "red-sauce-pasta",
+    slug: "red-sauce-pasta",
+    title: "Red Sauce Pasta",
+    category: "Savory",
+    icon: UtensilsCrossed,
+    tone: "cherry",
+    image: { src: redSaucePastaImg },
+    images: RESPONSIVE_IMAGES["red-sauce-pasta"],
+    description: "Penne in a spiced tomato sauce, finished with a heavy hand on the chilli flakes.",
+    personalNote: "a simple starting version for the vault — I'll probably tweak this one again.",
+    difficulty: "easy",
+    prepTime: "10 min",
+    cookTime: "20 min",
+    totalTime: "30 min",
+    servings: "serves 2",
+    yieldAmount: 2,
+    yieldUnit: "servings",
+    ingredientGroups: [
+      {
+        group: "For the Pasta",
+        items: [
+          { name: "Penne pasta", quantity: 200, unit: "g" },
+          { name: "Tomato puree or crushed tomatoes", quantity: 300, unit: "g" },
+          { name: "Garlic, chopped", quantity: 3, unit: "cloves" },
+          { name: "Onion, chopped", quantity: 1, unit: "small" },
+          { name: "Olive oil", quantity: 2, unit: "tbsp" },
+          { name: "Mixed herbs and chilli flakes", amount: "to taste" },
+        ],
+      },
+    ],
+    ingredients: ["Penne", "Tomato", "Garlic", "Onion", "Olive oil", "Chilli flakes"],
+    wrongIngredients: ["Chocolate", "Candy", "Ice cream", "Syrup", "Cereal", "Ketchup packets"],
+    instructions: [
+      {
+        id: "boil-pasta",
+        title: "Boil the Pasta",
+        text: "Cook the penne in salted water until al dente, then drain, reserving a little pasta water.",
+        timerSeconds: 600,
+      },
+      {
+        id: "make-sauce",
+        title: "Make the Sauce",
+        text: "Sauté the onion and garlic in olive oil until soft, then stir in the tomato puree and simmer.",
+        timerSeconds: 600,
+      },
+      {
+        id: "combine",
+        title: "Combine",
+        text: "Toss the drained pasta through the sauce, loosening with a splash of pasta water if needed.",
+      },
+      {
+        id: "season",
+        title: "Season and Serve",
+        text: "Finish with mixed herbs and a generous amount of chilli flakes.",
+      },
+    ],
+    tips: [
+      "Reserved pasta water helps the sauce cling instead of sitting separately.",
+      "This is a first-draft recipe — quantities may get adjusted later.",
+    ],
+    moods: ["easy", "comfort", "3am craving"],
+    featured: false,
+    spotlight: false,
+  },
+  {
+    id: "momos",
+    slug: "momos",
+    title: "Momos",
+    category: "Comfort Food",
+    icon: CookingPot,
+    tone: "biscuit",
+    image: { src: momosWithDipImg },
+    images: RESPONSIVE_IMAGES.momos,
+    description: "Pan-fried dumplings served with a spiced tomato-chilli dip.",
+    personalNote: "a simple starting version for the vault — I'll probably tweak this one again.",
+    difficulty: "a little fiddly",
+    prepTime: "40 min",
+    cookTime: "15 min",
+    totalTime: "1 hr",
+    servings: "makes about 15",
+    yieldAmount: 15,
+    yieldUnit: "momos",
+    ingredientGroups: [
+      {
+        group: "For the Filling",
+        items: [
+          { name: "Cabbage, finely chopped", quantity: 1, unit: "cup" },
+          { name: "Carrot, grated", quantity: 0.5, unit: "cup" },
+          { name: "Spring onion, chopped", quantity: 2, unit: "tbsp" },
+          { name: "Garlic and ginger, minced", quantity: 1, unit: "tbsp" },
+          { name: "Soy sauce", quantity: 1, unit: "tbsp" },
+        ],
+      },
+      {
+        group: "For Assembly",
+        items: [
+          { name: "Store-bought or homemade momo wrappers", quantity: 15, unit: "" },
+          { name: "Oil, for pan-frying", amount: "as needed" },
+        ],
+      },
+    ],
+    ingredients: ["Cabbage", "Carrot", "Garlic", "Ginger", "Soy sauce", "Wrappers"],
+    wrongIngredients: ["Chocolate", "Candy", "Ice cream", "Syrup", "Cereal", "Ketchup packets"],
+    instructions: [
+      {
+        id: "mix-filling",
+        title: "Mix the Filling",
+        text: "Combine the cabbage, carrot, spring onion, garlic, ginger and soy sauce in a bowl.",
+      },
+      {
+        id: "fill-fold",
+        title: "Fill and Fold",
+        text: "Place a spoonful of filling in each wrapper and pleat closed into a pouch shape.",
+      },
+      {
+        id: "steam-or-fry",
+        title: "Steam, Then Pan-Fry",
+        text: "Steam until the wrappers turn translucent, then pan-fry briefly for a crisp base.",
+        timerSeconds: 600,
+      },
+      {
+        id: "make-dip",
+        title: "Make the Dip",
+        text: "Blend tomatoes, chilli and a little garlic into a quick, spiced dipping sauce.",
+      },
+    ],
+    tips: [
+      "Don't overfill — they're harder to seal and more likely to burst.",
+      "This is a first-draft recipe — quantities may get adjusted later.",
+    ],
+    moods: ["comfort", "cooking-for-someone", "easy"],
+    featured: false,
     spotlight: false,
   },
 ];

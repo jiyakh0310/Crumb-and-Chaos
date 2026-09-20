@@ -1,46 +1,64 @@
 import { cn } from "@/utils/cn";
 import { GRAIN_URL } from "@/utils/grain";
-
-const TONES = {
-  caramel:
-    "radial-gradient(circle at 26% 22%, color-mix(in oklab, var(--color-caramel) 55%, transparent) 0%, transparent 50%), linear-gradient(155deg, var(--color-cocoa) 0%, var(--color-chocolate) 65%, var(--color-espresso) 100%)",
-  chocolate:
-    "radial-gradient(circle at 70% 18%, color-mix(in oklab, var(--color-cocoa) 60%, transparent) 0%, transparent 55%), linear-gradient(165deg, var(--color-chocolate) 0%, var(--color-espresso) 100%)",
-  cherry:
-    "radial-gradient(circle at 30% 28%, color-mix(in oklab, var(--color-cherry) 38%, transparent) 0%, transparent 55%), linear-gradient(155deg, var(--color-cocoa) 0%, var(--color-espresso) 100%)",
-  biscuit:
-    "radial-gradient(circle at 28% 20%, color-mix(in oklab, var(--color-biscuit) 32%, transparent) 0%, transparent 50%), linear-gradient(155deg, var(--color-cocoa) 0%, var(--color-chocolate) 70%, var(--color-espresso) 100%)",
-};
+import { useImageLoaded } from "@/hooks/useImageLoaded";
+import { TONES, Fallback } from "@/components/ui/ImageFallback";
 
 /**
  * Renders a real photo when `src` is provided; otherwise falls back
  * to a tasteful gradient + grain placeholder so every creation can
  * ship today and swap in real photography later without touching
  * layout code — just add `image.src`.
+ *
+ * Real photos fade in once loaded (no flash of blank space), fail
+ * gracefully back to the gradient placeholder if the request errors,
+ * and default to lazy-loading — pass `priority` for above-the-fold
+ * images (hero-adjacent shots) so they load eagerly instead.
+ *
+ * Single-crop only — for a photo reused across hero/portrait/card/
+ * mobile layouts with different aspect ratios, use
+ * `ResponsiveFoodImage` instead.
  */
-export default function PlaceholderArt({ src, alt = "", tone = "caramel", icon: Icon, className, iconClassName }) {
-  if (src) {
-    return <img src={src} alt={alt} loading="lazy" className={cn("h-full w-full object-cover", className)} />;
-  }
+export default function PlaceholderArt({
+  src,
+  alt = "",
+  tone = "caramel",
+  icon: Icon,
+  className,
+  iconClassName,
+  priority = false,
+}) {
+  const { ref, loaded, failed, onLoad, onError } = useImageLoaded(src);
 
-  return (
-    <div role="img" aria-label={alt} className={cn("relative h-full w-full overflow-hidden", className)}>
-      <div className="absolute inset-0" style={{ background: TONES[tone] ?? TONES.caramel }} />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-[0.08]"
-        style={{ backgroundImage: `url("${GRAIN_URL}")` }}
-      />
-      {Icon ? (
-        <Icon
-          aria-hidden="true"
-          strokeWidth={1}
+  if (src && !failed) {
+    return (
+      <div className={cn("relative h-full w-full overflow-hidden", className)}>
+        {!loaded ? (
+          <div aria-hidden="true" className="absolute inset-0" style={{ background: TONES[tone] ?? TONES.caramel }} />
+        ) : null}
+        <img
+          ref={ref}
+          src={src}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding="async"
+          onLoad={onLoad}
+          onError={onError}
           className={cn(
-            "absolute left-1/2 top-1/2 h-[36%] w-[36%] -translate-x-1/2 -translate-y-1/2 text-cream/15",
-            iconClassName,
+            "photo-treatment h-full w-full object-cover opacity-0 transition-opacity duration-700 ease-out",
+            loaded && "opacity-100",
           )}
         />
-      ) : null}
-    </div>
-  );
+        {loaded ? (
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 opacity-[0.05]"
+            style={{ backgroundImage: `url("${GRAIN_URL}")` }}
+          />
+        ) : null}
+      </div>
+    );
+  }
+
+  return <Fallback alt={alt} tone={tone} icon={Icon} className={className} iconClassName={iconClassName} />;
 }

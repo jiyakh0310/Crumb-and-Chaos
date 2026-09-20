@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import PlaceholderArt from "@/components/ui/PlaceholderArt";
+import ResponsiveFoodImage from "@/components/ui/ResponsiveFoodImage";
 import { getRecipeBySlug } from "@/data/recipes";
 import { getCreationStatus } from "@/utils/creationStatus";
 import { useRevealTrigger } from "@/hooks/useRevealTrigger";
@@ -15,7 +15,10 @@ import { cn } from "@/utils/cn";
  */
 export default function KitchenItemCard({ creation, isUnlocked, onPlay, index = 0, className }) {
   const shouldReduceMotion = useReducedMotion();
-  const { title, category, note, image, icon, tone, featured, recipeSlug } = creation;
+  const { title, category, note, image, images, icon, tone, featured, recipeSlug, layoutHint } = creation;
+  // Kitchen tiles come in a few shapes (see KitchenGallery's RHYTHM) — pick
+  // the crop that actually matches each shape instead of stretching one.
+  const variant = layoutHint === "wide" ? "wide" : layoutHint === "small" ? "card" : "portrait";
 
   const recipe = recipeSlug ? getRecipeBySlug(recipeSlug) : null;
   const status = getCreationStatus(creation, isUnlocked);
@@ -59,12 +62,14 @@ export default function KitchenItemCard({ creation, isUnlocked, onPlay, index = 
         }
       />
 
-      <PlaceholderArt
-        src={image?.src}
+      <ResponsiveFoodImage
+        images={images}
+        fallbackSrc={image?.src}
+        variant={variant}
         alt={title}
         tone={tone}
         icon={icon}
-        className="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover:scale-[1.05]"
+        className="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover:scale-[1.03]"
       />
 
       <div

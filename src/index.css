@@ -102,6 +102,41 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Shared treatment for real food photography — warm, slightly
+     deep, editorial. Nudges saturation/contrast/warmth just enough
+     to feel consistent across different source photos without
+     flattening their own character or reading as an Instagram
+     filter. Applied once here so every photo on the site (current
+     placeholders and future real photography alike) shares one
+     visual voice. */
+  .photo-treatment {
+    filter: saturate(0.94) contrast(1.07) brightness(0.99) sepia(0.035);
+  }
+}
+
+/* Very subtle desktop-only drift for small decorative marks (crumb
+   motifs). A couple of pixels and a slow rotation — never something
+   a visitor consciously notices moving. CSS rather than JS/motion
+   since it's purely decorative and always-on while mounted. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  @keyframes crumb-drift {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(1.5px, -2px) rotate(3deg);
+    }
+  }
+
+  .crumb-drift {
+    animation: crumb-drift 7s ease-in-out infinite;
+  }
+
+  .crumb-drift-slow {
+    animation: crumb-drift 9s ease-in-out infinite;
+    animation-delay: -3s;
+  }
 }
 
 /* ---------------------------------------------------------------- */

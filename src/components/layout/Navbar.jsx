@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Croissant, Menu, X } from "lucide-react";
 import Container from "@/components/ui/Container";
@@ -11,13 +11,6 @@ import { cn } from "@/utils/cn";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(() => window.scrollY > 32);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { pathname } = useLocation();
-
-  const [prevPathname, setPrevPathname] = useState(pathname);
-  if (pathname !== prevPathname) {
-    setPrevPathname(pathname);
-    setMenuOpen(false);
-  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);

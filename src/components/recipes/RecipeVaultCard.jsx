@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Lock, LockOpen } from "lucide-react";
-import PlaceholderArt from "@/components/ui/PlaceholderArt";
+import ResponsiveFoodImage from "@/components/ui/ResponsiveFoodImage";
 import { useRevealTrigger } from "@/hooks/useRevealTrigger";
 import { cn } from "@/utils/cn";
 
@@ -10,10 +10,23 @@ import { cn } from "@/utils/cn";
  * unlock game; unlocked cards are a <Link> straight to the recipe.
  * The lock state is signaled by icon shape, image treatment, and
  * copy — never color alone.
+ *
+ * `variant` picks which pre-cropped frame this card wants — default
+ * "portrait" matches the vault's own aspect-[4/5] grid slot; pass
+ * "wide" where a caller sizes the card aspect-[16/10] instead (e.g.
+ * the Journal's related-recipe row).
  */
-export default function RecipeVaultCard({ recipe, unlocked, onPlay, size = "default", index = 0, className }) {
+export default function RecipeVaultCard({
+  recipe,
+  unlocked,
+  onPlay,
+  size = "default",
+  index = 0,
+  className,
+  variant = "portrait",
+}) {
   const shouldReduceMotion = useReducedMotion();
-  const { title, category, icon, tone, image, difficulty, totalTime } = recipe;
+  const { title, category, icon, tone, image, images, difficulty, totalTime } = recipe;
   const { ref, inView } = useRevealTrigger();
 
   const Wrapper = unlocked ? Link : "button";
@@ -39,13 +52,15 @@ export default function RecipeVaultCard({ recipe, unlocked, onPlay, size = "defa
         aria-label={unlocked ? `Open ${title} recipe` : `Play Catch the Ingredients to unlock ${title}`}
       />
 
-      <PlaceholderArt
-        src={image?.src}
+      <ResponsiveFoodImage
+        images={images}
+        fallbackSrc={image?.src}
+        variant={variant}
         alt={title}
         tone={tone}
         icon={icon}
         className={cn(
-          "transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover:scale-[1.05]",
+          "transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:group-hover:scale-[1.03]",
           !unlocked && "saturate-[0.6] brightness-[0.75]",
         )}
       />
