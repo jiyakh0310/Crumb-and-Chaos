@@ -17,9 +17,6 @@ import { getTotalTime } from "@/utils/recipeFormat";
 import { GRAIN_URL } from "@/utils/grain";
 import { cn } from "@/utils/cn";
 
-const CYCLE_INTERVAL_MS = 130;
-const CYCLE_DURATION_MS = 1900;
-const CONSULTING_MESSAGES = ["consulting the crumbs...", "this feels legally binding.", "too late. fate has spoken."];
 
 /**
  * A dramatic, unnecessary decision made on the visitor's behalf.
